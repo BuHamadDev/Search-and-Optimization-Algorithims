@@ -3,7 +3,7 @@ Revision for Intelligent Systems lab test.
 
 **The Following Algorithims are discussed:**
 
-**Search:** BFS, DFS, IDDFS, DLS, GBFS, A*, Minimax, and Alph-Beta-Pruning
+**Search:** BFS, DFS, IDDFS, DLS, UCS, GBFS, A*, Minimax, and Alph-Beta-Pruning
 
 **Optimization:** Simple HC, Steepest-Ascent HC, RR HC, Stochastic HC, Simulated Annealing
 
