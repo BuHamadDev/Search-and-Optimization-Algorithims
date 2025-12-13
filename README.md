@@ -6,6 +6,7 @@ Revision for Intelligent Systems lab test.
 **Optimization:** Simple HC, Steepest-Ascent HC, RR HC, Stochastic HC, Simulated Annealing
 
 **First Step: Create a Virtual Environment**
+
 You must have anaconda installed.
 
 1- Open Anaconda Prompt
