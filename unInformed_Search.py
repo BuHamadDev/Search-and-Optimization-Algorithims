@@ -40,7 +40,9 @@ def DFS(m, start = None):
     explored = []
     frontier = [start]
 
-    dfscells = [] # We return this list, which contains the path taken by DFS
+    # Dictionary will later be used to get the optimal path
+    dfscells = {} # We return this list, which contains the path taken by DFS
+
 
     # Keep looping until frontier is empty
     while len(frontier) > 0 :
@@ -48,9 +50,12 @@ def DFS(m, start = None):
         # Remove a node from frontier
         currCell = frontier.pop()
 
-        #Add node to explored and dfs lists
+        if currCell in explored:
+            continue
+
+        # Add node to explored
         explored.append(currCell)
-        dfscells.append(currCell)
+        
 
         # Check if this cell is the goal state
         if currCell == m._goal:
@@ -69,14 +74,26 @@ def DFS(m, start = None):
                     childCell = (currCell[0] - 1, currCell[1] )
                 
                 
-                # Add child cell to the frontiet if its not reached yet
+                # Add child cell to the frontier if its not reached yet
                 if childCell in frontier or childCell in explored:
                     continue
                 
+                #Add node to  frontier and dfscells
                 frontier.append(childCell)
-        
-    # Return path taken
-    return dfscells
+                dfscells[childCell] = currCell
+
+    if m._goal not in dfscells and start != m._goal:
+        optimalPath = None
+    else:
+        optimalPath = {}
+        cell = m._goal
+        while cell != start:
+            optimalPath[dfscells[cell]] = cell
+            cell = dfscells[cell]
+
+    
+    # Return optimal path & explored cells
+    return optimalPath, explored
 
 
 # Create maze
@@ -84,13 +101,17 @@ m = maze()
 m.CreateMaze(theme = COLOR.light, loopPercent = 50)
 
 # Create Agent
-a = agent(m, color=COLOR.red, footprints=True, shape='arrow')
+a1 = agent(m, color=COLOR.red, footprints=True, shape='arrow')
+a2 = agent(m, color=COLOR.blue, footprints=True, filled=True)
 
 # Get the path using DFS function we implemented
-path = DFS(m)
+path, explored = DFS(m)
 
 # Trace the path
-m.tracePath({a:path}, delay=100)
+m.tracePath({a2:explored}, delay = 100)
+    
+if path:
+    m.tracePath({a1:path}, delay = 100)
 
 # Run the maze
 m.run()
