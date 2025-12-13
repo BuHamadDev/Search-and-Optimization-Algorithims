@@ -4,7 +4,7 @@ from queue import PriorityQueue
 
 def h(cell):
     x1, y1 = cell
-    x2, y2 = cell
+    x2, y2 = m._goal
     return abs(x1-x2) + abs(y1-y2)
 
 def GBFS(m, start = None):
