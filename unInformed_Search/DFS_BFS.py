@@ -19,7 +19,7 @@ BFS uses FIFO data structure, while DFS uses FILO data structure.
 
 To implement BFS we simply change the way we pop from the frontier.
 
-Line 49 :
+Line 51 :
 
 BFS --> currCell = frontier.pop(0) # FIFO
 DFS --> currCell = frontier.pop()  # LIFO
