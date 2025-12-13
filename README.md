@@ -29,5 +29,3 @@ You must have anaconda installed.
 
 
 **Second Step: Run Programs**
-
-unInformed_Search.py:  Discusses the backbone of searching algorithims which are DFS & BFS
