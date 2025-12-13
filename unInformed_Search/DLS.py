@@ -81,9 +81,11 @@ a2 = agent(m, color=COLOR.red, footprints=True, shape='arrow')
 
 # Trace paths
 m.tracePath({a1:explored}, delay=70)
+
 if optimal:
     m.tracePath({a2:optimal}, delay=70)
     print("Goal cell is within the depth limit. Goal cell is reachable.")
+
 else:
     print("Depth limit reached, goal cell is unreachable.")
 m.run()
