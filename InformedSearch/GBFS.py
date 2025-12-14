@@ -39,7 +39,7 @@ def GBFS(m, start = None):
                 if childCell in explored:
                     continue
 
-                explored.append(childCell)
+                
                 child_h = h(childCell)
                 frontier.put((child_h, childCell))
                 parent[childCell] = parentCell
