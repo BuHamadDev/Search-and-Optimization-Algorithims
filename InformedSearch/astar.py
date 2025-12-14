@@ -19,7 +19,7 @@ def astar(m, start = None):
     g_cost[start] = 0
 
     frontier = PriorityQueue()
-    frontier.put((g.get()[0] + h(start), start))
+    frontier.put((g_cost[start] + h(start), start))
     parent = {}
 
     while not frontier.empty():
@@ -43,31 +43,39 @@ def astar(m, start = None):
                 elif d == 'S':
                     childCell = (parentCell[0] + 1, parentCell[1])
                 else:
-                    childCell = (parentCell[0] + 1, parentCell[1])
+                    childCell = (parentCell[0] - 1, parentCell[1])
 
-                g_cost[childCell] = child_g = parent_g + 1
+                child_g = parent_g + 1
                 
-                child_h = h(childCell)
 
                 if childCell in explored:
                     continue
-
-                frontier.put((child_g + child_h, childCell))
-
-
-
-
-
-        
-    
+                
+                if child_g < g_cost[childCell]:
+                    frontier.put((child_g + child_h, childCell))
+                    g_cost[childCell] = child_g
+                    parent[childCell] = parentCell
+                    child_h = h(childCell)
 
     
+
+    if m._goal in explored:
+        optimalPath = {}
+        cell = m._goal
+        while cell != start:
+            optimalPath[parent[cell]] = cell
+            cell = parent[cell]
+        return optimalPath, explored
+    else:
+        print("Goal is unreachable")
+        return None, explored
+
 
 
 m = maze()
 m.CreateMaze()
 
-explored, path = astar(m)
+path,explored = astar(m)
 
 a1 = agent(m,color=COLOR.blue, footprints=True,filled=True)
 a2 = agent(m,color=COLOR.red, footprints=True, shape='arrow')
